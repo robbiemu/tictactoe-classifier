@@ -32,7 +32,7 @@ I was going to move on to a CNN but I realized taht a 3x3 matrix doesnt give muc
 
 my keras model was based on this [kdnuggets](https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html) article. little work was needed to get that to function for our purposes, so I played with the layers and epochs and learning rate. Although the article highlights an approach to configuring layers and nodes of your network, and using that approach I was able to produce better results (99.675% over ≈100000 samples with 20% in test) with 3 • 14 node layers, I am able to achieve nearly this result with a single 9 node layer (99.13% over sample data).
 
-While we get good results training on sample sample sizes, we cannot compete with the perceptron for tiny sample sizes (45 samples produce about 11% accuracy). However, on as little as 666 of-each (≈2000 samples) with the larger network we are approaching our final accuracy (98.75% vs 85.75%). The single hidden layer network requires about 10000 samples to produce good predictions.
+While we get good results training on sample sample sizes, we cannot compete with the perceptron for tiny sample sizes (45 samples produce an astounding ≈11% accuracy). However, on as little as 666 of-each (≈2000 samples) with the larger network we are approaching our final accuracy (98.75% vs 85.75% for the single-layer). The single hidden layer network requires about 10000 samples to produce good predictions.
 
 #### further reading
 
