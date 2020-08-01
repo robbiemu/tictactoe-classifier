@@ -8,13 +8,15 @@ this repo is my attempt.
 
 a note on deviation from initial proposal:
 
-I started working with strings representing a board, so "X O X " would be a board like this:
+I started working with strings representing a board, so <code>"X O X "</code> would be a board like this:
 
-- X \_ \_
-- O \_ \_
-- X \_ \_
+<pre>
+  <code>X _ _</code>
+  <code>O _ _</code>
+  <code>X _ _</code>
+</pre>
 
-So I had generated csvs with 2 columns: board, label. However, when I went on to build a tensorflow model, separating out each category as its own column in the csv became important. The schema for the csv of these can be notated with letters and number for the row columns, like this: a1, a2, a3, b1, b2, b3, c1, c2, c3, label
+So I had generated csvs with 2 columns: **board**, **label**. However, when I went on to build a tensorflow model, separating out each category as its own column in the csv became important. The schema for the csv of these can be notated with letters and number for the row columns, like this: **a1**, **a2**, **a3**, **b1**, **b2**, **b3**, **c1**, **c2**, **c3**, **label**
 
 ### perceptron
 
