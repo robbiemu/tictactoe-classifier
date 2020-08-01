@@ -19,6 +19,12 @@ X = encoder_board.fit_transform(X).toarray()
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42)
 
+offset = -(len(X_train)//5)
+X_val = X_train[offset:]
+y_val = y_train[offset:]
+X_train = X_train[:offset]
+y_train = y_train[:offset]
+
 model = Sequential()
 model.add(Dense(units=9, kernel_initializer='uniform',
                 activation='relu', input_dim=27))
@@ -31,12 +37,12 @@ max of 500 epochs of training
 at likely best fit, wait 1% of processing time to be sure before stopping early
 '''
 epochs = 500
-earlystopping = callbacks.EarlyStopping(monitor="loss",
-                                        mode="min", patience=epochs//100,
+earlystopping = callbacks.EarlyStopping(monitor="val_accuracy",
+                                        mode="max", patience=epochs//100,
                                         restore_best_weights=True)
 
 model.fit(X_train, y_train, batch_size=10,
-          epochs=epochs, callbacks=[earlystopping])
+          epochs=epochs, callbacks=[earlystopping], validation_data=(X_val, y_val))
 y_pred = (model.predict(X_test) > 0.5).astype("int32")
 
 index = 0
