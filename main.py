@@ -13,9 +13,6 @@ parser.add_argument('--train', '--train-csv', metavar='FILE', type=str,
 parser.add_argument('--test', '--test-csv', metavar='FILE', type=str,
                     help='filename to read test data from, with columns: board, label')
 
-parser.add_argument('--board', metavar='BOARD', type=str,
-                    help='an in-line board to test')
-
 args = parser.parse_args()
 
 print('loading training data')

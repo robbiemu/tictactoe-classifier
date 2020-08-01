@@ -26,9 +26,16 @@ X_train = X_train[:offset]
 y_train = y_train[:offset]
 
 model = Sequential()
-model.add(Dense(units=9, kernel_initializer='uniform',
+
+model.add(Dense(units=14, kernel_initializer='uniform',
                 activation='relu', input_dim=27))
+model.add(Dense(units=14, kernel_initializer='uniform',
+                activation='relu'))
+model.add(Dense(units=14, kernel_initializer='uniform',
+                activation='relu'))
+
 model.add(Dense(units=1, kernel_initializer='uniform', activation='sigmoid'))
+
 model.compile(optimizer='adam', loss='binary_crossentropy',
               metrics=['accuracy'])
 
