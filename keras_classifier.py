@@ -31,7 +31,7 @@ X = encoder_board.fit_transform(X).toarray()
 
 # we need to separate some data to train with, and reserve some to test on
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42)
+    X, y, test_size=0.2, random_state=42)  # when we set our hyperparameters or share results, we need to remove the variance, ie set a random_state. in practice though, we want to run a few times with different random_state, to remove bias
 
 # let's use validation data to support early stopping
 offset = -(len(X_train)//5)
@@ -69,7 +69,7 @@ earlystopping = callbacks.EarlyStopping(monitor="val_accuracy",
                                         mode="max", patience=epochs//100,
                                         restore_best_weights=True)
 '''
-the batch size was 10 by default. it is suggested to decrease batch size as much as possible for parallelism in gpu training, but lower batch sizes won't globally optimize as well.
+it is suggested to decrease batch size as much as possible for parallelism in gpu training, but lower batch sizes won't globally optimize as well.
 in our case, we know some things about the sample data. I generated it with of-each, generating three different classes of data: fully random, sparse random, and random but valid. so we will need at least a batch_size large enough to allow each batch a chance of reflecting 3 states. that size grows with the log of the training data length
 '''
 batch_size = 3 * (int(math.log(len(X_train))) + 1)
