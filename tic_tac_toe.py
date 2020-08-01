@@ -14,6 +14,10 @@ class TicTacToe:
         return np.array([TicTacToe.TilesReverse[i] for i in list(board)])
 
     @staticmethod
+    def csv(board):
+        return ",".join([TicTacToe.Tiles[i] for i in board.tolist()])
+
+    @staticmethod
     def pretty_print(board):
         res = ""
         for row in board.reshape(3, 3):
