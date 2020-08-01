@@ -3,6 +3,8 @@ from perceptron import Perceptron
 
 
 class TicTacToeClassifier:
+    '''sketch approach'''
+
     def train(self, X_train, y_train):
         self.perceptron = Perceptron(len(X_train[0]))
         self.perceptron.train(X_train, y_train)

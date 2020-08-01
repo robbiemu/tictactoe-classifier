@@ -6,6 +6,8 @@ from generator import TicTacToeGenerator
 parser = argparse.ArgumentParser(description='generate boards.')
 parser.add_argument('-p', '--pretty-print', action='store_true',
                     help='pretty-print boards')
+parser.add_argument('-c', '--csv', action='store_true',
+                    help='print comma-separated boards')
 
 parser.add_argument('--with-labels', action='store_true',
                     help='print validity labels')
@@ -32,5 +34,18 @@ for i in range(args.valid or args.of_each or 0):
     boards.append(t.generate_valid())
 
 for board in boards:
-    print("".join([TicTacToe.pretty_print(board)
-                   if args.pretty_print else TicTacToe.serialize(board), ',' + str(TicTacToe.is_valid(board)) if args.with_labels else ""]))
+    if args.pretty_print:
+        representation = TicTacToe.pretty_print(board)
+        if args.with_labels:
+            representation += '\n' + \
+                TicTacToe.Validities[TicTacToe.is_valid(board)]
+    elif args.csv:
+        representation = TicTacToe.csv(board)
+        if args.with_labels:
+            representation += ',' + str(1 if TicTacToe.is_valid(board) else 0)
+    else:
+        representation = TicTacToe.serialize(board)
+        if args.with_labels:
+            representation += ',' + str(1 if TicTacToe.is_valid(board) else 0)
+
+    print(representation)
