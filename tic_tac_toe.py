@@ -11,7 +11,7 @@ class TicTacToe:
 
     @staticmethod
     def deserialize(board):
-        return np.array([TicTacToe.TilesReverse[i] for i in board.split()])
+        return np.array([TicTacToe.TilesReverse[i] for i in list(board)])
 
     @staticmethod
     def pretty_print(board):

@@ -4,12 +4,13 @@ from perceptron import Perceptron
 
 class TicTacToeClassifier:
     def train(self, X_train, y_train):
-        self.perceptron = Perceptron(len(X_train[0]))
+        self.perceptron = Perceptron(9)  # len(X_train[0])
         self.perceptron.train(X_train, y_train)
 
     def test(self, X_test):
-        y = np.array([])
+        y_hat = np.array([])
         for x in X_test:
-            y.append(self.perceptron.predict(x))
+            prediction = self.perceptron.predict(x)
+            y_hat = np.append(y_hat, prediction)
 
-        return y
+        return y_hat
