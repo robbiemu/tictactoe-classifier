@@ -44,7 +44,7 @@ y_train = y_train[:offset]
 model = Sequential()
 
 # we have an input layer of 27
-# we have 3 hidden layers of 14
+# we have 3 hidden layers of 14 (27 + 1 / 2)
 model.add(Dense(units=14, kernel_initializer='uniform',
                 activation='relu', input_dim=27))
 model.add(Dense(units=14, kernel_initializer='uniform',

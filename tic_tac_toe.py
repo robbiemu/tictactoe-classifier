@@ -8,7 +8,7 @@ class TicTacToe:
 
     Tiles = dict([(-1, 'O'), (0, ' '), (1, 'X')])
     TilesReverse = dict([('O', -1), (' ', 0), ('X', 1)])
-    Validities = dict([(0, 'invalid'), (1, 'valid')])
+    Validities = dict([(False, 'invalid'), (True, 'valid')])
 
     @staticmethod
     def serialize(board):
@@ -52,10 +52,13 @@ class TicTacToe:
 
     @staticmethod
     def check_diagonals(board):
-        if (len(set([board[i][i] for i in range(len(board))])) == 1) and (board[0][0] != 0):
-            return board[0][0]
-        if (len(set([board[i][len(board)-i-1] for i in range(len(board))])) == 1) and (board[0][0] != 0):
-            return board[0][len(board)-1]
+        '''
+        the original had set the diagonals wrong
+        '''
+        if len(set([board[i][i] for i in range(len(board))])) == 1 and board[1][1] != 0 \
+                or \
+                len(set([board[i][len(board)-i-1] for i in range(len(board))])) == 1 and board[1][1] != 0:
+            return board[1][1]
         return 0
 
     @staticmethod
@@ -70,36 +73,47 @@ class TicTacToe:
 
     @staticmethod
     def is_valid(board):
-        '''src https://www.geeksforgeeks.org/validity-of-a-given-tic-tac-toe-board-configuration/'''
+        '''
+        original src https://www.geeksforgeeks.org/validity-of-a-given-tic-tac-toe-board-configuration/
+
+        it was noticed that this algorithm produces this scenario:
+            X O O 
+            X O X 
+            O X X 
+        invalid
+
+        this is strange, because the algorithm is otherwise almost always correct.
+        '''
 
         arr = TicTacToe.serialize(board)
         # Count number of 'X' and 'O' in the given board
-        xcount = arr.count('X')
-        ocount = arr.count('O')
+        x_count = arr.count('X')
+        o_count = arr.count('O')
 
-        # Board can be valid only if either xcount and ocount
-        # is same or xount is one more than oCount
-        if(xcount == ocount+1 or xcount == ocount):
+        x = TicTacToe.TilesReverse['X']
+        o = TicTacToe.TilesReverse['O']
+
+        # Board can be valid only if either x_count and o_count
+        # is same or x_count is one more than o_count
+        if x_count == o_count or x_count == o_count + 1:
             # Check if O wins
-            if TicTacToe.win_check(board, -1):
+            if TicTacToe.win_check(board, o):
                 # Check if X wins, At a given point only one can win,
                 # if X also wins then return Invalid
-                if TicTacToe.win_check(board, 1):
-                    return 0
+                if TicTacToe.win_check(board, x):
+                    return False
 
-                # O can only win if xcount == ocount in case where whole
-                # board has values in each position.
-                if xcount == ocount:
-                    return 1
+                # O can only win if x_count == o_count
+                return x_count == o_count
 
-            # If X wins then it should be xc == oc + 1,
+            # If X wins then it should be x_count == o_count + 1,
             # If not return Invalid
-            if TicTacToe.win_check(board, 1) and xcount != ocount+1:
-                return 0
+            elif TicTacToe.win_check(board, x):
+                return x_count == o_count + 1
 
-            # if O is not the winner return Valid
-            if not TicTacToe.win_check(board, -1):
-                return 1
+            # if neither is the winner return Valid
+            else:
+                return True
 
-        # If nothing above matches return invalid
-        return 0
+        # count of moves are not correct, return Invalid
+        return False

@@ -42,10 +42,10 @@ for board in boards:
     elif args.csv:
         representation = TicTacToe.csv(board)
         if args.with_labels:
-            representation += ',' + str(TicTacToe.is_valid(board))
+            representation += ',' + str(1 if TicTacToe.is_valid(board) else 0)
     else:
         representation = TicTacToe.serialize(board)
         if args.with_labels:
-            representation += ',' + str(TicTacToe.is_valid(board))
+            representation += ',' + str(1 if TicTacToe.is_valid(board) else 0)
 
     print(representation)

@@ -20,19 +20,19 @@ So I had generated csvs with 2 columns: **board**, **label**. However, when I we
 
 ### perceptron
 
-<small>_tl-dr; ≈60%_</small>
+<small>_tl-dr; ≈58%_</small>
 
-in my case I found that I could get about a 60% rate of failure with the perceptron, but no more. Sample sizes ranged from ≈10 to ≈100000. (--of-each 3 to 33333). At about 45 training samples was sufficient to achieve that ratio testing even 10000 test samples.
+in my case I found that I could get about a 60% rate of success with the perceptron, but no more. Sample sizes ranged from ≈10 to ≈100000. (--of-each 3 to 33333). At about 45 training samples was sufficient to achieve that ratio testing even 10000 test samples.
 
 I was going to move on to a CNN but I realized taht a 3x3 matrix doesnt give much room to shift around in it. additionally, a CNN would not perform better than a fully connected NN here, since a convolutional neural network _zooms in_ on small segments to identify key features of a much larger block of data. A fully connnected neural network instead looks at each location statically, with equal weight.
 
 ### fully connected neural network
 
-<small>_tl-dr; >99.5%_</small>
+<small>_tl-dr; ≈99.8%_</small>
 
-my keras model was based on this [kdnuggets](https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html) article. little work was needed to get that to function for our purposes, so I played with the layers and epochs and learning rate. Although the article highlights an approach to configuring layers and nodes of your network, and using that approach I was able to produce better results (99.78% over ≈100000 samples with 20% in test) with 3 • 14 node layers, I am able to achieve nearly this result with a single 9 node layer (99.13% over sample data). Letting the model run a full 500 epochs once on 100000 samples, the accuracy was 99.845%.
+my keras model was based on this [kdnuggets](https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html) article. little work was needed to get that to function for our purposes, so I played with the layers and epochs and learning rate. Although the article highlights an approach to configuring layers and nodes of your network, and using that approach I was able to produce better results (43 epcohs, 99.82% over ≈100000 samples with 20% in test) with 3 • 14 node layers, I am able to achieve nearly this result with a single 9 node layer (17 epochs, 99.2% over sample data). Finally, letting the model run a without early stopping (858 epochs) once on 100000 samples, the accuracy was 99.92%.
 
-While we get good results training on sample sample sizes, we cannot compete with the perceptron for tiny sample sizes (45 samples produce an astounding ≈11% accuracy). However, on as little as 666 of-each (≈2000 samples) with the larger network we are approaching our final accuracy (98.75% vs 85.75% for the single-layer). The single hidden layer network requires about 10000 samples to produce good predictions.
+While we get good results training on sample sample sizes, we cannot compete with the perceptron for tiny sample sizes (100 samples produce ≈55% accuracy). However, on as little as 333 of-each (≈1000 samples) with the larger network we are approaching our final accuracy (98.5%).
 
 #### further reading
 

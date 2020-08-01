@@ -42,4 +42,4 @@ for board, label in list(zip(X_test, y_test)):
 
     index += 1
 
-print(miss/len(y_test), 'failure ratio')
+print("{:.3f}% success".format(100 * (1 - miss/len(y_test))))
