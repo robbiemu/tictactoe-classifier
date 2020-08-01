@@ -36,10 +36,16 @@ for i in range(args.valid or args.of_each or 0):
 for board in boards:
     if args.pretty_print:
         representation = TicTacToe.pretty_print(board)
+        if args.with_labels:
+            representation += '\n' + \
+                TicTacToe.Validities[TicTacToe.is_valid(board)]
     elif args.csv:
         representation = TicTacToe.csv(board)
+        if args.with_labels:
+            representation += ',' + str(TicTacToe.is_valid(board))
     else:
         representation = TicTacToe.serialize(board)
+        if args.with_labels:
+            representation += ',' + str(TicTacToe.is_valid(board))
 
-    print("".join([representation, ',' +
-                   str(TicTacToe.is_valid(board)) if args.with_labels else ""]))
+    print(representation)
