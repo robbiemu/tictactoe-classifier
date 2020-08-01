@@ -36,9 +36,13 @@ print('testing')
 y_hat = c.test(X_test)
 
 index = 0
+miss = 0
 for board, label in list(zip(X_test, y_test)):
     if y_hat[index] != label:
+        miss += 1
         print(TicTacToe.pretty_print(board), 'expected:',
               label, 'received:', y_hat[index])
 
     index += 1
+
+print(miss/len(y_test), 'failure ratio')
