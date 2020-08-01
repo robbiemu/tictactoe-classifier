@@ -2,7 +2,10 @@ import numpy as np
 
 
 class Perceptron:
-    '''src https://medium.com/@thomascountz/19-line-line-by-line-python-perceptron-b6f113b161f3'''
+    '''
+    a class to train a perceptron on a set of weights, expressing a binary classification
+    src https://medium.com/@thomascountz/19-line-line-by-line-python-perceptron-b6f113b161f3
+    '''
 
     def __init__(self, no_of_inputs, epochs=100, learning_rate=0.01):
         self.epochs = epochs

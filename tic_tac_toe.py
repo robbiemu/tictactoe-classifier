@@ -2,6 +2,10 @@ import numpy as np
 
 
 class TicTacToe:
+    '''
+    helper class to handle tic tac toe boards
+    '''
+
     Tiles = dict([(-1, 'O'), (0, ' '), (1, 'X')])
     TilesReverse = dict([('O', -1), (' ', 0), ('X', 1)])
     Validities = dict([(0, 'invalid'), (1, 'valid')])

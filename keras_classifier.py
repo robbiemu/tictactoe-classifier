@@ -9,6 +9,10 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras import callbacks
 
+'''
+kinda like a jupyter notebook, but without the notebook
+'''
+
 dataset = pd.read_csv('samples-tictactoe.csv')
 X = dataset.iloc[:, 0:9].values
 y = dataset.iloc[:, 9:10].values

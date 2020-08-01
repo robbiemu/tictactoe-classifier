@@ -4,6 +4,10 @@ from tic_tac_toe import TicTacToe
 
 
 class TicTacToeGenerator:
+    '''
+    various methods of generating plausable tic tac toe boards
+    '''
+
     def generate_naive(self):
         tiles = [-1, 0, 1]
         return np.random.choice(tiles, 9)
