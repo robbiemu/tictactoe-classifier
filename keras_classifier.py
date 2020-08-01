@@ -61,10 +61,13 @@ model.compile(optimizer='adam', loss='binary_crossentropy',
               metrics=['accuracy'])
 
 '''
-max of 500 epochs of training
+max epochs of training - the number of epochs might need to be much lower, or could need to be higher as well. I am using the complexity of the data, and the size of the testing data I will be applying the model to.
 at likely best fit, wait 1% of processing time to be sure before stopping early
 '''
-epochs = 500
+complexity_of_data = 9 * len(encoder_board.categories_) * len(np.unique(y))
+scaling = math.log(len(y_test), 10) + 1
+epochs = int(complexity_of_data * scaling)  # by hand, went from 100 to 500
+print('epochs', epochs)
 earlystopping = callbacks.EarlyStopping(monitor="val_accuracy",
                                         mode="max", patience=epochs//100,
                                         restore_best_weights=True)
