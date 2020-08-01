@@ -2,6 +2,7 @@ import numpy as np
 
 
 class Perceptron:
+    '''src https://medium.com/@thomascountz/19-line-line-by-line-python-perceptron-b6f113b161f3'''
 
     def __init__(self, no_of_inputs, threshold=100, learning_rate=0.01):
         self.threshold = threshold
