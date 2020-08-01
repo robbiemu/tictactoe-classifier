@@ -34,10 +34,6 @@ my keras model was based on this [kdnuggets](https://www.kdnuggets.com/2017/09/n
 
 While we get good results training on sample sample sizes, we cannot compete with the perceptron for tiny sample sizes (100 samples produce ≈55% accuracy). However, on as little as 333 of-each (≈1000 samples) with the larger network we are approaching our final accuracy (98.5%).
 
-#### further reading
-
-According to a [summary](https://machinelearningmastery.com/how-to-configure-the-number-of-layers-and-nodes-in-a-neural-network/) by Jason Brownlee, in regards to tuning nodes and layers, one heuristic versus another will perform about as well given a varied enough number of problems to apply them to. It is strange that there is no formal approach to determining such key characteristics.
-
 ## commands
 
 ### generate.py
