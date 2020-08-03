@@ -4,6 +4,8 @@ a weekend puzzle that I posed to my friends at work: given tiles "X", "O", and a
 
 this repo is my attempt.
 
+the inital work was done with a generator that was not very formal, just randomly populating boards, and anther to generate random valid boards. I ended up with more boards, and many more duplicates than I needed. a formal combinations approach removes the duplicates. this is seen to improve the performance slightly of the base perceptron.
+
 ## summary results
 
 a note on deviation from initial proposal:
@@ -18,13 +20,20 @@ I started working with strings representing a board, so <code>"X O X "</code> wo
 
 So I had generated csvs with 2 columns: **board**, **label**. However, when I went on to build a tensorflow model, separating out each category as its own column in the csv became important. The schema for the csv of these can be notated with letters and number for the row columns, like this: **a1**, **a2**, **a3**, **b1**, **b2**, **b3**, **c1**, **c2**, **c3**, **label**
 
+testing was done with 0.2 percent of boards in reserve and a variable number of in training.
+
 ### perceptron
 
-<small>_tl-dr; ≈58%_</small>
+<small>_tl-dr; ≈61%_</small>
 
-in my case I found that I could get about a 60% rate of success with the perceptron, but no more. Sample sizes ranged from ≈10 to ≈100000. (--of-each 3 to 33333). At about 45 training samples was sufficient to achieve that ratio testing even 10000 test samples.
+each measurement was run 10 times:
 
-I was going to move on to a CNN but I realized taht a 3x3 matrix doesnt give much room to shift around in it. additionally, a CNN would not perform better than a fully connected NN here, since a convolutional neural network _zooms in_ on small segments to identify key features of a much larger block of data. A fully connnected neural network instead looks at each location statically, with equal weight.
+- at .25% of max (39 samples) in training, 55.243% accuracy
+- at 1% of max (157 samples) in training, 58.358% accuracy
+- at 10% of max (1574 samples) in training, 61.915% accuracy
+- at 25% of max (3936 samples) in training, 64.509% accuracy
+- at 50% of max (7873 samples) in training, 61.956% accuracy
+- at 100% of max (15746 samples) in training, 60.711% accuracy
 
 ### fully connected neural network
 
@@ -33,6 +42,31 @@ I was going to move on to a CNN but I realized taht a 3x3 matrix doesnt give muc
 my keras model was based on this [kdnuggets](https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html) article. little work was needed to get that to function for our purposes (first attempts already resolved about 94%), so I played with the layers and epochs and learning rate. Although the article highlights an approach to configuring layers and nodes of your network, and using that approach I was able to produce better results (43 epcohs, 99.82% over ≈100000 samples with 20% in test) with 3 • 14 node layers, I am able to achieve nearly this result with a single 9 node layer (17 epochs, 99.2% over sample data). Finally, letting the model run a without early stopping (858 epochs) once on 100000 samples, the accuracy was 99.92%.
 
 While we get good results training on sample sample sizes, we cannot compete with the perceptron for tiny sample sizes (100 samples produce ≈55% accuracy). However, on as little as 333 of-each (≈1000 samples) with the larger network we are approaching our final accuracy (98.5%).
+
+### other methods
+
+the failure for the perceptron to predict made me want to go back and address that. I knew that the problem was that the data is not linearly separaable. So, kernel methods are the solution.
+
+#### support vectors with gaussian kernel
+
+<small>_tl-dr; ≈62%_</small>
+
+this method is an order of magnitude slower.
+
+each measurement was run 10 times:
+
+- at .25% of max (39 samples) in training, 61.671% accuracy (12KB kernel)
+- at 1% of max (157 samples) in training, 60.726% accuracy (197KB)
+- at 10% of max (1574 samples) in training, 61.915% accuracy (19.8MB)
+- at 25% of max (3936 samples) in training, 64.509% accuracy (124MB)
+- at 50% of max (7873 samples) in training, 61.956% accuracy (495MB)
+- at 100% of max (15746 samples) in training, 60.711% accuracy (1.98GB kernel)
+
+I am blown away by how well this performs with small sample sizes. relative to the basic perceptron, this is better with sparse samples when working with clean data (no duplicates).
+
+#### direct kernel perceptron
+
+wip
 
 ## commands
 

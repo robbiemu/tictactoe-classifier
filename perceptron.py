@@ -4,7 +4,7 @@ import numpy as np
 class Perceptron:
     '''
     a class to train a perceptron on a set of weights, expressing a binary classification
-    src https://medium.com/@thomascountz/19-line-line-by-line-python-perceptron-b6f113b161f3
+    original src https://medium.com/@thomascountz/19-line-line-by-line-python-perceptron-b6f113b161f3
     '''
 
     def __init__(self, no_of_inputs, epochs=100, learning_rate=0.01):
@@ -14,11 +14,7 @@ class Perceptron:
 
     def predict(self, inputs):
         summation = np.dot(inputs, self.weights[1:]) + self.weights[0]
-        if summation > 0:
-            activation = 1
-        else:
-            activation = 0
-        return activation
+        return 1 if summation > 0 else 0  # activation is 1 or 0
 
     def train(self, training_inputs, labels):
         for _ in range(self.epochs):
