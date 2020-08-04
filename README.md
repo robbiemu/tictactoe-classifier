@@ -6,6 +6,8 @@ this repo is my attempt.
 
 ## summary results
 
+I started out by generating sample boards that are meant to look like an approximation of the real data, without regard to what the full set of real plausable boards would be. if I use the exact set of plausable boards, I get slightly better results for the perceptron, but slight worse for the fully connected neural network approach. Since the later is approaching 100% success, I am interested in maintaining this approach described here.
+
 a note on deviation from initial proposal:
 
 I started working with strings representing a board, so <code>"X O X "</code> would be a board like this:
