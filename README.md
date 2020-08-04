@@ -24,16 +24,16 @@ testing was done with 0.2 percent of boards in reserve and a variable number of 
 
 ### perceptron
 
-<small>_tl-dr; ≈61%_</small>
+<small>_tl-dr; ≈60%_</small>
 
-each measurement was run 10 times:
+- at .25% of max (39 samples) in training, 58.7% accuracy (4000 runs)
+- at 1% of max (157 samples) in training, 59.278% accuracy (1000 runs)
+- at 10% of max (1574 samples) in training, 61.398% accuracy (100 runs)
+- at 25% of max (3936 samples) in training, 61.027% accuracy (40 runs)
+- at 50% of max (7873 samples) in training, 59.747% accuracy (100 runs)
+- at 100% of max (15746 samples) in training, 60.35% accuracy (100 runs)
 
-- at .25% of max (39 samples) in training, 55.243% accuracy
-- at 1% of max (157 samples) in training, 58.358% accuracy
-- at 10% of max (1574 samples) in training, 61.915% accuracy
-- at 25% of max (3936 samples) in training, 64.509% accuracy
-- at 50% of max (7873 samples) in training, 61.956% accuracy
-- at 100% of max (15746 samples) in training, 60.711% accuracy
+I ran the 25% one at 100 runs also, but got such a different number (55%) that I decided that I can't remove significant variability with less than some number probably related to the 3937 test sample size.
 
 ### fully connected neural network
 
@@ -49,18 +49,18 @@ the failure for the perceptron to predict made me want to go back and address th
 
 #### support vectors with gaussian kernel
 
-<small>_tl-dr; ≈62%_</small>
+<small>_tl-dr; ≈70%_</small>
 
-this method is an order of magnitude slower.
+this method is an order of magnitude slower, and shows more variance.
 
 each measurement was run 10 times:
 
-- at .25% of max (39 samples) in training, 61.671% accuracy (12KB kernel)
-- at 1% of max (157 samples) in training, 60.726% accuracy (197KB)
-- at 10% of max (1574 samples) in training, 61.915% accuracy (19.8MB)
-- at 25% of max (3936 samples) in training, 64.509% accuracy (124MB)
-- at 50% of max (7873 samples) in training, 61.956% accuracy (495MB)
-- at 100% of max (15746 samples) in training, 60.711% accuracy (1.98GB kernel)
+- at .25% of max (39 samples) in training, 61.791% accuracy (400 runs) (12KB kernel)
+- at 1% of max (157 samples) in training, 63.85% accuracy (400 runs) (197KB)
+- at 10% of max (1574 samples) in training, 78.633% accuracy (100 runs) (19.8MB)
+- at 25% of max (3936 samples) in training, 78.537% accuracy (100 runs) (124MB)
+- at 50% of max (7873 samples) in training, 88.476% accuracy (100 runs) (495MB)
+- at 100% of max (15746 samples) in training, 73.505% accuracy (10 runs) (1.98GB kernel)
 
 I am blown away by how well this performs with small sample sizes. relative to the basic perceptron, this is better with sparse samples when working with clean data (no duplicates).
 
