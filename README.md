@@ -37,11 +37,11 @@ I ran the 25% one at 100 runs also, but got such a different number (55%) that I
 
 ### fully connected neural network
 
-<small>_tl-dr; ≈99.8%_</small>
+<small>_tl-dr; ≈98%_</small>
 
-my keras model was based on this [kdnuggets](https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html) article. little work was needed to get that to function for our purposes (first attempts already resolved about 94%), so I played with the layers and epochs and learning rate. Although the article highlights an approach to configuring layers and nodes of your network, and using that approach I was able to produce better results (43 epcohs, 99.82% over ≈100000 samples with 20% in test) with 3 • 14 node layers, I am able to achieve nearly this result with a single 9 node layer (17 epochs, 99.2% over sample data). Finally, letting the model run a without early stopping (858 epochs) once on 100000 samples, the accuracy was 99.92%.
+my keras model was based on this [kdnuggets](https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html) article.
 
-While we get good results training on sample sample sizes, we cannot compete with the perceptron for tiny sample sizes (100 samples produce ≈55% accuracy). However, on as little as 333 of-each (≈1000 samples) with the larger network we are approaching our final accuracy (98.5%).
+in comparison to the earlier sample data (which was random and included many duplicates), the new data set reduced accuracy, as well as sample size available. Working from the full set (with 20% reserved for testing),. I am getting a 97.7% accuracy with early stopping, or 98.6% accuracy without it (over 10 runs each).
 
 ### other methods
 
